@@ -1,0 +1,8 @@
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: message-subscription
+spec:
+  topic: test-topic
+  route: /dapr/subscribe
+  pubsubname: pubsub
