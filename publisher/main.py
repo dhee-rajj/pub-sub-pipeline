@@ -1,22 +1,19 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import requests
+import json
+from dapr.clients import DaprClient
+import logging
 
-app = FastAPI()
+logger = logging.getLogger("uvicorn")
 
-class PublishRequest(BaseModel):
-    topic: str
-    message: str
-
-@app.post("/publish/")
-async def publish_message(request: PublishRequest):
-    dapr_url = f"http://localhost:3500/v1.0/publish/pubsub/{request.topic}"
-    payload = {"message": request.message}
-    response = requests.post(dapr_url, json=payload)
-    if response.status_code != 204:
-        raise HTTPException(status_code=response.status_code, detail=response.text)
-    return {"status": "Message published"}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+def publish_message(message: str):
+    payload = {"message": message}
+    logger.info(f"Publishing to test-topic with payload: {payload}")
+    
+    with DaprClient() as client:
+        client.publish_event(
+            pubsub_name="pubsub",
+            topic_name="test-topic",
+            data=json.dumps(payload),
+        )
+    logger.info(f"Publish result: Success")
+    
+    return {"status": "Message published", "message": message}
