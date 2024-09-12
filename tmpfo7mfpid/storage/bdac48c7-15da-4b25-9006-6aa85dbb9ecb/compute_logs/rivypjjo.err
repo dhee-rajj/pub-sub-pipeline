@@ -1,0 +1,6 @@
+[32m2024-09-12 13:33:40 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - 94657 - LOGS_CAPTURED - Started capturing logs in process (pid: 94657).
+[32m2024-09-12 13:33:41 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - 94657 - add_products_to_db - STEP_START - Started execution of step "add_products_to_db".
+[32m2024-09-12 13:33:41 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - 94657 - add_products_to_db - STEP_OUTPUT - Yielded output "result" of type "Any". (Type check passed).
+[32m2024-09-12 13:33:41 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - add_products_to_db - Writing file at: /home/cptn-jacksparrow/Documents/task2/tmpfo7mfpid/storage/bdac48c7-15da-4b25-9006-6aa85dbb9ecb/add_products_to_db/result using PickledObjectFilesystemIOManager...
+[32m2024-09-12 13:33:41 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - 94657 - add_products_to_db - HANDLED_OUTPUT - Handled output "result" using IO manager "io_manager"
+[32m2024-09-12 13:33:41 +0530[0m - dagster - [34mDEBUG[0m - my_pipeline - bdac48c7-15da-4b25-9006-6aa85dbb9ecb - 94657 - add_products_to_db - STEP_SUCCESS - Finished execution of step "add_products_to_db" in 677ms.

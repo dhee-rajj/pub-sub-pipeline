@@ -19,7 +19,7 @@ async def subscribe_message(request: Request):
             if message is None:
                 logger.warning("Received message with missing topic or message")
             else:
-                logger.info(f"Received message on test-topic message: {message}")
+                logger.info(f"Received message on test-db topic: {message}")
         except json.JSONDecodeError:
             logger.error("Failed to decode JSON data")
     else:
@@ -28,7 +28,7 @@ async def subscribe_message(request: Request):
 
 @app.get("/dapr/subscribe")
 async def dapr_subscribe():
-    return [{"pubsubname": "pubsub", "topic": "test-topic", "route": "/subscribe/"}]
+    return [{"pubsubname": "pubsub", "topic": "test-db", "route": "/subscribe/"}]
 
 if __name__ == "__main__":
     import uvicorn

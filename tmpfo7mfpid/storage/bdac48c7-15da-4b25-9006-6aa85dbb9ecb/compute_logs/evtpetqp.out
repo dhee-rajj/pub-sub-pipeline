@@ -1,0 +1,5 @@
+[2m2024-09-12T08:03:41.128029Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.191128Z[0m [33m WARN[0m [2mlibsql::replication::remote_client[0m[2m:[0m Frames prefetching failed because of new session token returned by handshake
+(1, 'Product 1', 10.0)
+(2, 'Product 1', 10.0)
+(3, 'Product 2', 20.0)

@@ -10,5 +10,6 @@ curl -X POST "http://localhost:8000/publish/" -H "Content-Type: application/json
 
 dapr publish --publish-app-id publisher --pubsub pubsub --topic test-topic --data '{"topic": "test-topic", "message": "Hello, World!"}'
 
-token:
-eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MjYwNTgwNzcsImlkIjoiMmIzMzE4MjgtYWNmYi00NTZkLTk0MDItYWQ1NjkwYjNiOTc1In0.xWE4zT7pZEEVTzPYX6t7XTHDxXQ7wRayj5u1Ai9ngDy879YvVWbcQmsD6bL2FLE837s-K-9FNBng5iCaC2LiDg
+dagster: 
+dagit -f pipeline/pipeline.py
+dagster job execute -f pipeline/pipeline.py -j my_pipeline

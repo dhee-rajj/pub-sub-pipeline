@@ -1,0 +1,10 @@
+[2m2024-09-12T08:03:41.015006Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.092002Z[0m [33m WARN[0m [2mlibsql::replication::remote_client[0m[2m:[0m Frames prefetching failed because of new session token returned by handshake
+[2m2024-09-12T08:03:41.143078Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.239108Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.288882Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.325056Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.392511Z[0m [33m WARN[0m [2mlibsql::replication::remote_client[0m[2m:[0m Frames prefetching failed because of new session token returned by handshake
+[2m2024-09-12T08:03:41.444382Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.549918Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
+[2m2024-09-12T08:03:41.604429Z[0m [32m INFO[0m [2mlibsql::replication::remote_client[0m[2m:[0m Attempting to perform handshake with primary.
