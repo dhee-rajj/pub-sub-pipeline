@@ -5,8 +5,10 @@ from dapr.clients import DaprClient
 # from pipeline.pipeline import add_products_to_db
 import logging
 from database.tursodb import insert_product
+import modal
 
 logger = logging.getLogger("uvicorn")
+
 
 def publish_message(message: str):
     payload = {"message": message}
