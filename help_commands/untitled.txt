@@ -6,10 +6,12 @@ dapr run --app-id subscriber --app-port 8001 --dapr-http-port 3501 -- uvicorn su
 
 dapr run --app-id publisher --app-port 8000 --dapr-http-port 3500 -- uvicorn publisher.main:app --host 0.0.0.0 --port 8000
 
-curl -X POST "http://localhost:8000/publish/" -H "Content-Type: application/json" -d '{"topic": "mytopic", "message": "Hello, Dapr!"}'
+curl -X POST "http://localhost:8000/create_product" -H "Content-Type: application/json"      -d '{"name": "Sample Product", "price": 19.99}'
 
 dapr publish --publish-app-id publisher --pubsub pubsub --topic test-topic --data '{"topic": "test-topic", "message": "Hello, World!"}'
 
 dagster: 
 dagit -f pipeline/pipeline.py
 dagster job execute -f pipeline/pipeline.py -j my_pipeline
+
+curl -X POST "http://127.0.0.1:8000/collect_tasks" -H "Content-Type: application/json" -d '{"name": "csv"}'

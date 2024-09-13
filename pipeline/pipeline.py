@@ -14,7 +14,8 @@ def add_products_to_db(_):
 def query_products_from_db(_):
     conn = get_connection()
     results = conn.execute("SELECT * FROM products").fetchall()
-    return [dict(row) for row in results]
+    for row in results:
+        print(row)
 
 @job
 def my_pipeline():
