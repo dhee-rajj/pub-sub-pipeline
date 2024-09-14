@@ -24,13 +24,10 @@ async def subscribe_message(request: Request):
                     "Received message with missing topic or message")
             else:
                 logger.info(f"Received message on {topic} topic: {message}")
-                # Add your logic to handle the message based on the topic here
                 if topic == "create-product-topic":
                     logger.info(f"Processing product message: {message}")
-                    # Add your logic to handle the product message here
                 elif topic == "get-products-topic":
                     logger.info(f"Processing get-products message: {message}")
-                    # Add your logic to handle the get-products message here
         except json.JSONDecodeError:
             logger.error("Failed to decode JSON data")
     else:

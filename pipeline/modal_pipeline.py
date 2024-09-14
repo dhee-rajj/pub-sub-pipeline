@@ -3,6 +3,7 @@ from database.tursodb import get_connection
 import modal
 
 app = modal.App(
+    name="my_modal_app",
     image=modal.Image.debian_slim().pip_install("dagster", "libsql_experimental")
 )
 
@@ -53,3 +54,7 @@ def my_pipeline():
 @repository
 def my_repository():
     return [my_pipeline]
+
+if __name__ == "__main__":
+    with app.run():
+        my_pipeline.execute_in_process()
