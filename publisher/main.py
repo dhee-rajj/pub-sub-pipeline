@@ -2,22 +2,20 @@ import json
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from dapr.clients import DaprClient
-# from pipeline.pipeline import add_products_to_db
 import logging
-from database.tursodb import insert_product
-import modal
+from database.tursodb import insert_product, get_connection
 
 logger = logging.getLogger("uvicorn")
 
 
-def publish_message(message: str):
+def publish_message(message: str, topic_name: str):
     payload = {"message": message}
     logger.info(f"Publishing to test-db with payload: {payload}")
     
     with DaprClient() as client:
         client.publish_event(
             pubsub_name="pubsub",
-            topic_name="test-db",
+            topic_name=topic_name,
             data=json.dumps(payload),
         )
     logger.info(f"Publish result: Success")
@@ -42,12 +40,34 @@ async def create_product(product: Product):
         message = f"Product added: {product.name} with price {product.price}"
         
         # Publish the message using the existing function
-        result = publish_message(message)
+        result = publish_message(message, "create-product-topic")
         
         return result
     except Exception as e:
         logger.error(f"Error creating product: {e}")
         raise HTTPException(status_code=500, detail="Failed to create product")
+
+
+@app.post("/get_products")
+async def get_products():
+    try:
+        conn = get_connection()
+        results = conn.execute("SELECT * FROM products").fetchall()
+        
+        for row in results:
+            product = {
+                "name": row[0],
+                "price": row[1]
+            }
+            message = f"Product: {product['name']} with price {product['price']}"
+            
+            # Publish the message using the existing function
+            publish_message(message, "get-products-topic")
+        
+        return {"status": "Products Fetched"}
+    except Exception as e:
+        logger.error(f"Error getting products: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get products")
 
 # Run the FastAPI app
 if __name__ == "__main__":

@@ -6,7 +6,9 @@ dapr run --app-id subscriber --app-port 8001 --dapr-http-port 3501 -- uvicorn su
 
 dapr run --app-id publisher --app-port 8000 --dapr-http-port 3500 -- uvicorn publisher.main:app --host 0.0.0.0 --port 8000
 
-curl -X POST "http://localhost:8000/create_product" -H "Content-Type: application/json"      -d '{"name": "Sample Product", "price": 19.99}'
+curl -X POST "http://localhost:8000/create_product" -H "Content-Type: application/json" -d '{"name": "Iphone", "price": 19.99}'
+
+curl -X POST "http://localhost:8000/get_products" -H "Content-Type: application/json"
 
 dapr publish --publish-app-id publisher --pubsub pubsub --topic test-topic --data '{"topic": "test-topic", "message": "Hello, World!"}'
 

@@ -1,8 +1,17 @@
 apiVersion: dapr.io/v1alpha1
 kind: Subscription
 metadata:
-  name: message-subscription
+  name: create-product-subscription
 spec:
-  topic: test-topic
+  topic: create-product-topic
+  route: /dapr/subscribe
+  pubsubname: pubsub
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: get-product-subscription
+spec:
+  topic: get-product-topic
   route: /dapr/subscribe
   pubsubname: pubsub
