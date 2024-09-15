@@ -1,9 +1,10 @@
-from typing import Any, List, Dict
-from dagster import op, job, repository
 import csv
+from typing import List, Dict, Any
 from database.tursodb import get_connection, insert_product
+from dagster import op, job, repository
 
-def add_products_to_db(_) -> None:
+@op
+def add_products_to_db() -> None:
     products: List[Dict[str, Any]] = [
         {"name": "Pixel 9", "price": 100.0},
         {"name": "Pixel 9 Pro", "price": 150.0},
@@ -12,20 +13,22 @@ def add_products_to_db(_) -> None:
         insert_product(product['name'], product['price'])
 
 @op
-def query_products_from_db(_) -> List[Dict[str, Any]]:
+def query_products_from_db() -> List[Dict[str, Any]]:
     conn = get_connection()
     results = conn.execute("SELECT * FROM products").fetchall()
-    for row in results:
+    column_names = ['id', 'name', 'price']
+    dict_results = [dict(zip(column_names, row)) for row in results]
+    for row in dict_results:
         print(row)
-    return results
+    return dict_results
 
 @op
-def convert_to_csv(_, query_results: List[Dict[str, Any]]) -> None:
+def convert_to_csv(query_results: List[Dict[str, Any]]) -> None:
     with open('result.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['id', 'name', 'price'])  # Assuming the table has these columns
         for row in query_results:
-            writer.writerow(row)
+            writer.writerow([row['id'], row['name'], row['price']])
     print("CSV file created successfully.")
 
 @job
