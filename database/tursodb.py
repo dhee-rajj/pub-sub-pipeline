@@ -2,7 +2,7 @@ import os
 import libsql_experimental as libsql
 import logging
 from dotenv import load_dotenv
-
+from typing import Optional
 
 # Load environment variables from .env file
 load_dotenv()
@@ -11,14 +11,14 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def get_connection():
-    url = os.getenv("TURSO_DATABASE_URL")
-    auth_token = os.getenv("TURSO_AUTH_TOKEN")
-    conn = libsql.connect("products.db", sync_url=url, auth_token=auth_token)
+def get_connection() -> libsql.Connection:
+    url: Optional[str] = os.getenv("TURSO_DATABASE_URL")
+    auth_token: Optional[str] = os.getenv("TURSO_AUTH_TOKEN")
+    conn: libsql.Connection = libsql.connect("products.db", sync_url=url, auth_token=auth_token)
     conn.sync()
     return conn
 
-def insert_product(name, price):
+def insert_product(name: str, price: float) -> None:
     conn = get_connection()
     conn.execute("INSERT INTO products (name, price) VALUES (?, ?)", (name, price))
     conn.commit()
