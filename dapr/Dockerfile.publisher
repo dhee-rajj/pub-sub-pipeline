@@ -1,0 +1,27 @@
+# Set the working directory in the container
+
+FROM python:3.12.3-slim
+
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt ./
+
+# Install the dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the publisher code into the container
+COPY publisher/ ./publisher/
+COPY components/ /root/.dapr/components/
+COPY tursodb.py ./tursodb.py
+COPY .env ./.env
+
+# Install Dapr CLI
+RUN apt-get update && apt-get install -y wget \
+    && wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash \
+    && dapr init --slim \
+    && rm -rf /var/lib/apt/lists/*
+
+EXPOSE 8000
+
+CMD ["uvicorn", "publisher.main:app", "--host", "0.0.0.0", "--port", "8000"]

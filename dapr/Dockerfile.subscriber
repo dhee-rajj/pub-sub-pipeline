@@ -1,0 +1,27 @@
+# Use an official Python runtime as a parent image
+FROM python:3.12.3-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt ./
+
+# Install the dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the subscriber code into the container
+COPY subscriber/ ./subscriber/
+COPY dapr.yaml ./dapr.yaml
+COPY components/ /root/.dapr/components/
+
+# Install Dapr CLI
+RUN apt-get update && apt-get install -y wget \
+    && wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash \
+    && dapr init --slim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Expose the port that the app runs on
+EXPOSE 8001 
+
+CMD ["uvicorn", "subscriber.main:app", "--host", "0.0.0.0", "--port", "8001"]

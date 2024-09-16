@@ -1,0 +1,15 @@
+version: 1
+common: # optional section for variables shared across apps
+  env:  # any environment variable shared across apps
+    DEBUG: true
+apps:
+  - appID: publisher
+    appDirPath: ./publisher
+    appPort: 8000
+    daprHTTPPort: 3500
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+  - appID: subscriber
+    appDirPath: ./subscriber
+    appPort: 8001
+    daprHTTPPort: 3501
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
