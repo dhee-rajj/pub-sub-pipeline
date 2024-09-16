@@ -1,0 +1,21 @@
+version: 1
+common: # optional section for variables shared across apps
+  env:  # any environment variable shared across apps
+    DEBUG: true
+apps:
+  - appID: publisher
+    appDirPath: ./publisher/
+    appChannelAddress: 127.0.0.1
+    appProtocol: http
+    appPort: 8000
+    daprHTTPPort: 3500
+    enableProfiling: false
+    apiListenAddresses: ["127.0.0.1"]
+  - appID: subscriber
+    appDirPath: ./subscriber/
+    appChannelAddress: 127.0.0.1
+    appProtocol: http
+    appPort: 8001
+    daprHTTPPort: 3501
+    enableProfiling: false
+    apiListenAddresses: ["127.0.0.1"]

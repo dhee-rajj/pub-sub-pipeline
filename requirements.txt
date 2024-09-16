@@ -21,6 +21,7 @@ dagster-graphql==1.8.6
 dagster-pipes==1.8.6
 dagster-webserver==1.8.6
 dapr==1.14.0
+docker==7.1.0
 docstring_parser==0.16
 docutils==0.21.2
 duckdb==1.1.0
